@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+    
+	<div class="test_result">
+	{% for user in userinfo %}
+name:	{{ user.username }}  {{ user.s1}} {{ user.s2 }} {{ user.s3 }} {{ user.trend}}
+<br>	{% endfor %}
+	</div>
+{% endblock %}
