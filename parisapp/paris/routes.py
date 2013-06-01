@@ -16,6 +16,9 @@ PASSWORD = 'jrim'
 app = Flask(__name__)
 app.config.from_object(__name__)
 
+#global variable
+#museum
+
 @app.route('/home')
 def home():
     return render_template('home.html')
@@ -41,28 +44,33 @@ def send_next():
 	if(request.form['score1']>0):
 		if(request.form['score2']>0):
 			if(request.form['score3']>0):
-				trend="+++"
+				trendv="madam"
 			else:
-				trend="++-"
+				trendv="yuppie"
 		else:
 			if(request.form['score3']>0):
-				trend="+-+"	
+				trendv="avantgarde"
 			else:
-				trend="+--"
+				trendv="smith"
 	else:
 		if(request.form['score2']>0):
 			if(request.form['score3']>0):
-                                trend="-++"
+                                trendv="lady"
                         else:
-                                trend="-+-"
+                                trendv="realism"
 		else:
                         if(request.form['score3']>0):
-                                trend="--+"     
-                        else:
-                                trend="---"
+                                trendv="kitsch"
+			else:
+                                trendv="outsider"
+			
+#				ser=g.db.execute('select name,trend,latitude,longtitude,extra from museum where trend=mus[0] OR trend=mus[1] OR trend = mus[2]')
+
 
 	g.db.execute('insert into userinfo (username,s1,s2,s3,trend) values(?,?,?,?,?)',
-		[request.form['username'],request.form['score1'],request.form['score2'],request.form['score3'],trend])
+		[request.form['username'],request.form['score1'],request.form['score2'],request.form['score3'],trendv])
+
+#	museum=[dict(name=row[0],trend=row[1],latitude=row[2],longtitude=row[3],extra=row[4]) for row in ser.fetchall()]
 	g.db.commit()
 	
 	flash('Test END')
@@ -70,9 +78,30 @@ def send_next():
 
 @app.route('/taste_result')
 def taste_result():
+	trend=["collection","rococo","realism"]
 	cur=g.db.execute('select username,s1,s2,s3,trend from userinfo order by id desc')
 	userinfo = [dict(username=row[0],s1=row[1],s2=row[2],s3=row[3],trend=row[4]) for row in cur.fetchall()]
-	return render_template('taste_result.html',userinfo=userinfo)
+	for line in userinfo:
+		if line['trend']=="madam":			
+			trend=["collection","baroque","classicism"]
+		elif line['trend']=="yuppie":
+			trend=["neoclassicsim","rococo","realism"]		
+		elif line['trend']=="avantgarde":
+			trend=["middelage","rococo","realism"]
+		elif line['trend']=="smith":
+			trend=["neoclassicsim","rococo","realism"]
+		elif line['trend']=="lady":
+			trend=["neoclassicsim","rococo","realism"]
+		elif line['trend']=="realism":
+			trend=["neoclassicsim","rococo","realism"]
+		elif line['trend']=="kitsch":
+			trend=["neoclassicsim","rococo","realism"]
+		else:
+			trend=["colletion","rococo","realism"]
+
+	ser=g.db.execute('select name,trend,latitude,longtitude,extra from museum where trend=? OR trend = ? OR trend = ?',(trend[0],trend[1],trend[2],))
+	museum=[dict(name=row[0],trend=row[1],latitude=row[2],longtitude=row[3],extra=row[4]) for row in ser.fetchall()]
+	return render_template('taste_result.html',userinfo=userinfo,museum=museum)
 
 @app.route('/test')
 def test():
@@ -101,8 +130,32 @@ def logout():
 
 @app.route('/direction')
 def direction():
-	cur=g.db.execute('select * from museum')
-	museum = [dict(name=row[1],trend=row[2],latitude=row[3],longtitude=row[4],extra=row[5]) for row in cur.fetchall()]
+#	cur=g.db.execute('select * from museum')
+#	museum = [dict(name=row[1],trend=row[2],latitude=row[3],longtitude=row[4],extra=row[5]) for row in cur.fetchall()]
+	trend=["collection","rococo","realism"]
+	cur=g.db.execute('select username,s1,s2,s3,trend from userinfo order by id desc')
+	userinfo = [dict(username=row[0],s1=row[1],s2=row[2],s3=row[3],trend=row[4]) for row in cur.fetchall()]
+        for line in userinfo:
+                if line['trend']=="madam":
+                        trend=["collection","baroque","classicism"]
+                elif line['trend']=="yuppie":
+                        trend=["neoclassicsim","rococo","realism"]
+                elif line['trend']=="avantgarde":
+                        trend=["middelage","rococo","realism"]
+                elif line['trend']=="smith":
+                        trend=["neoclassicsim","rococo","realism"]
+                elif line['trend']=="lady":
+                        trend=["neoclassicsim","rococo","realism"]
+                elif line['trend']=="realism":
+                        trend=["neoclassicsim","rococo","realism"]
+                elif line['trend']=="kitsch":
+                        trend=["neoclassicsim","rococo","realism"]
+                else:
+                        trend=["colletion","rococo","realism"]
+
+        ser=g.db.execute('select name,trend,latitude,longtitude,extra from museum where trend=? OR trend = ? OR trend = ?',(trend[0],trend[1],trend[2],))
+        museum=[dict(name=row[0],trend=row[1],latitude=row[2],longtitude=row[3],extra=row[4]) for row in ser.fetchall()]
+
 	return render_template('direction.html',museum=museum)
 
 

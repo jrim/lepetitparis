@@ -5,5 +5,9 @@
 	{% for user in userinfo %}
 name:	{{ user.username }}  {{ user.s1}} {{ user.s2 }} {{ user.s3 }} {{ user.trend}}
 <br>	{% endfor %}
+	{% for mus in museum %}
+	museum = {{ mus.name}} {{ mus.trend }} {{ mus.latitude }} {{ mus.longtitude }} {{ mus.extra}}
+	<br>
+	{% endfor %}
 	</div>
 {% endblock %}

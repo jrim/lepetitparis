@@ -18,7 +18,7 @@
     <br>
     <b>Waypoints:</b> <br>
     <i>(Ctrl-Click for multiple selection)</i> <br>
-    <select multiple id="waypoints">
+    <select multiple id="waypoints" size=8>
 	{% for msm in museum %}
       <option value="{{ msm.latitude }},{{ msm.longtitude }}">{{ msm.name }}</input>
 	{% endfor %}
@@ -31,8 +31,18 @@
 	{% endfor %}
     </select>
     <br>
-      <input type="submit" onclick="calcRoute();">
+      <input type="submit" onclick="calcRoute();" value="Find my Route!">
     </div>
-    <div id="directions_panel" style="margin:20px;background-color:#FFEE77;"></div>
+    <div id="directions_panel" style="margin:20px;background-color:#000000;"></div>
     </div>
+	<div class= span8 >
+	<div id="information_panel" style="margin:5px;">we recommend these:<br>
+	{% for msm in museum %}
+	<b>{{ msm.name }}</b> - {{ msm.extra }}<br>
+	{% endfor %}
+
+</div>	
+
+
+
     {% endblock %}
