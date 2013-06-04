@@ -19,15 +19,15 @@ app.config.from_object(__name__)
 #global variable
 #museum
 
-@app.route('/home')
+@app.route('/')
 def home():
     return render_template('home.html')
 
-@app.route('/')
-def show_entries():
-	cur=g.db.execute('select title,text from entries order by id desc')
-	entries = [dict(title=row[0],text=row[1]) for row in cur.fetchall()]
-	return render_template('show_entries.html',entries=entries)
+#@app.route('/')
+#def show_entries():
+#	cur=g.db.execute('select title,text from entries order by id desc')
+#	entries = [dict(title=row[0],text=row[1]) for row in cur.fetchall()]
+#	return render_template('show_entries.html',entries=entries)
 
 @app.route('/add',methods=['POST'])
 def add_entry():
@@ -41,25 +41,27 @@ def add_entry():
 
 @app.route('/send_next',methods=['POST'])
 def send_next():
-	if(request.form['score1']>0):
-		if(request.form['score2']>0):
-			if(request.form['score3']>0):
+	if int(request.form['score1']>0):
+		if int(request.form['score2']>0):
+			if int(request.form['score3']>0):
 				trendv="madam"
+				flash(int(request.form['score2']))
+				flash(type(int(request.form['score2'])))
 			else:
 				trendv="yuppie"
 		else:
-			if(request.form['score3']>0):
+			if int(request.form['score3']>0):
 				trendv="avantgarde"
 			else:
 				trendv="smith"
 	else:
-		if(request.form['score2']>0):
-			if(request.form['score3']>0):
+		if int(request.form['score2']>0):
+			if int(request.form['score3']>0):
                                 trendv="lady"
                         else:
                                 trendv="realism"
 		else:
-                        if(request.form['score3']>0):
+                        if int(request.form['score3']>0):
                                 trendv="kitsch"
 			else:
                                 trendv="outsider"
