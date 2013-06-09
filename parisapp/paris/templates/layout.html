@@ -35,14 +35,14 @@
        <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
 
-	 <li><a href="{{ url_for('about') }}">about</a></li>
-	<li><a href="{{ url_for('test') }}">test</a></li>
-	<li><a href="{{ url_for('taste_result')}}">taste_result</a></li>
-	<li><a href="{{ url_for('direction') }}">direction</a> </li>
+	 <li><a href="{{ url_for('about') }}">About</a></li>
+	<li><a href="{{ url_for('test') }}">Test</a></li>
+	<li><a href="{{ url_for('taste_result')}}">Results</a></li>
+	<li><a href="{{ url_for('direction') }}">Route</a> </li>
 	  {% if not session.logged_in %}
-	  <li><a href="{{ url_for('login') }}">login</a></li>
+	  <li><a href="{{ url_for('login') }}">Login</a></li>
         {% else %}
-	  <li><a href="{{ url_for('logout') }}">logout</a></li>
+	  <li><a href="{{ url_for('logout') }}">Logout</a></li>
 	{% endif %}
 	</ul>
        </div>
@@ -63,6 +63,10 @@
       </div>
 </header>
 
+<br>
+<br>
+<br>
+Copyright (C) 2013 All rights reserved - Le petit Paris
 
 
     <!-- Le javascript

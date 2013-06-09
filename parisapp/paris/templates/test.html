@@ -24,12 +24,6 @@
             s2+=v2;
             s3+=v3;
 
-
-	alert(s1);
-	alert(s2);
-	alert(s3);
-
-
             document.getElementById("score1").value = s1;
             document.getElementById("score2").value = s2;
             document.getElementById("score3").value = s3;
@@ -43,29 +37,35 @@
  
         <form action="{{ url_for('send_next') }}" method=post class=send-next name=sendnext>
                 <dl>
-                    <input type=textarea  name=username>
-                    <input type=textarea id=score1 name=score1 >
-                    <input type=textarea id=score2 name=score2 >
-                    <input type=textarea id=score3 name=score3 >
+                    <input type=textarea  name=username placeholder="이름을 입력하세요">
+                    <input type=textarea id=score1 name=score1 style="display:none;" >
+                    <input type=textarea id=score2 name=score2 style="display:none;">
+                    <input type=textarea id=score3 name=score3 style="display:none;">
                 </dl>
                 <dl>
-      <p>
-                    <img src="{{url_for('static', filename='img/1_1.png')}}" name="1" width="200" height="600" onclick="next(1,0,0,-1);"  style="display:visible">
-                    <img src="{{url_for('static', filename='img/1_2.png')}}" name="1" width="200" height="600" onclick="next(1,1,0,-1);"  style="display:visible">
+		<p>더 마음에 드는 그림을 선택하세요</p>
+<div>
+     		 <p>
+<img src="{{url_for('static', filename='img/1_1.png')}}" name="1" width="200" height="600" onclick="next(1,0,0,-1);"  style="display:visible">
+<img src="{{url_for('static', filename='img/1_2.png')}}" name="1" width="200" height="600" onclick="next(1,1,0,-1);"  style="display:visible">
                 </p>
                 <p>
-                    <img src="{{url_for('static', filename='img/2_1.png')}}" name="2" width="200" height="600" onclick="next(2,1,0,0);"  style="display:none">
-                    <img src="{{url_for('static', filename='img/2_2.png')}}" name="2" width="200" height="600" onclick="next(2,0,0,1);"  style="display:none">
+<img src="{{url_for('static', filename='img/2_1.png')}}" name="2" width="200" height="600" onclick="next(2,1,0,0);"  style="display:none">
+<img src="{{url_for('static', filename='img/2_2.png')}}" name="2" width="200" height="600" onclick="next(2,0,0,1);"  style="display:none">
                 </p>
-                    <img src="{{url_for('static', filename='img/3_1.png')}}" name="3" width="200" height="600" onclick="next(3,1,-2,0);"  style="display:none">
-                    <img src="{{url_for('static', filename='img/3_2.png')}}" name="3" width="200" height="600" onclick="next(3,0,0,0);"  style="display:none">
-                <p>
-                    <img src="{{url_for('static', filename='img/4_1.png')}}" name="4" width="200" height="600" onclick="next(4,0,0,0);"  style="display:none">
-                    <img src="{{url_for('static', filename='img/4_2.png')}}" name="4" width="200" height="600" onclick="next(4,0,0,0);"  style="display:none">
-                <p>   
-                    <img src="{{url_for('static', filename='img/5_1.png')}}" name="5" width="200" height="600" onclick="end(5,-1,0,0);"  style="display:none">
-                    <img src="{{url_for('static', filename='img/5_2.png')}}" name="5" width="200" height="600" onclick="end(5,-1,0,0);"  style="display:none">
-                </p>                   </dl>
+		<p>
+<img src="{{url_for('static', filename='img/3_1.png')}}" name="3" width="200" height="600" onclick="next(3,1,-2,0);"  style="display:none">
+<img src="{{url_for('static', filename='img/3_2.png')}}" name="3" width="200" height="600" onclick="next(3,0,0,0);"  style="display:none">
+               </p>
+		 <p>
+<img src="{{url_for('static', filename='img/4_1.png')}}" name="4" width="200" height="600" onclick="next(4,0,0,0);"  style="display:none">
+<img src="{{url_for('static', filename='img/4_2.png')}}" name="4" width="200" height="600" onclick="next(4,0,0,0);"  style="display:none">
+                </p> 
+		<p>  
+<img src="{{url_for('static', filename='img/5_1.png')}}" name="5" width="200" height="600" onclick="end(5,-1,0,0);"  style="display:none">
+<img src="{{url_for('static', filename='img/5_2.png')}}" name="5" width="200" height="600" onclick="end(5,-1,0,0);"  style="display:none">
+                </p> 
+</div>                  </dl>
         </form>
 
 {% endblock %}

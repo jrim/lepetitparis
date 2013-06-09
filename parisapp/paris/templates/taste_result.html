@@ -3,13 +3,15 @@
     
 	<div class="test_result">
 	{% for user in userinfo %}
-<h3> Name : 	{{ user.username }}    Your taste is " {{ user.trend}}  "</h3>
+<h3> Hi, {{ user.username }}, Your taste is " {{ user.trend}} "</h3>
 <br>	{% endfor %}
 	
-	<h2>recommended museum</h2>
+	<h2>So, we recommend these museums</h2>
 	{% for mus in museum %}
-	{{ mus.name}} {{ mus.trend }} {{ mus.latitude }} {{ mus.longtitude }} {{ mus.extra}}
+	{{ mus.name}} -  {{ mus.extra}}
 	<br>
 	{% endfor %}
+
+	<a href="./direction"><h3>Go to map </h3></a>
 	</div>
 {% endblock %}

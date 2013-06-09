@@ -41,27 +41,25 @@ def add_entry():
 
 @app.route('/send_next',methods=['POST'])
 def send_next():
-	if int(request.form['score1']>0):
-		if int(request.form['score2']>0):
-			if int(request.form['score3']>0):
+	if int(request.form['score1'])>0:
+		if int(request.form['score2'])>0:
+			if int(request.form['score3'])>0:
 				trendv="madam"
-				flash(int(request.form['score2']))
-				flash(type(int(request.form['score2'])))
 			else:
 				trendv="yuppie"
 		else:
-			if int(request.form['score3']>0):
+			if int(request.form['score3'])>0:
 				trendv="avantgarde"
 			else:
 				trendv="smith"
 	else:
-		if int(request.form['score2']>0):
-			if int(request.form['score3']>0):
+		if int(request.form['score2'])>0:
+			if int(request.form['score3'])>0:
                                 trendv="lady"
                         else:
                                 trendv="realism"
 		else:
-                        if int(request.form['score3']>0):
+                        if int(request.form['score3'])>0:
                                 trendv="kitsch"
 			else:
                                 trendv="outsider"
@@ -85,21 +83,21 @@ def taste_result():
 	userinfo = [dict(username=row[0],s1=row[1],s2=row[2],s3=row[3],trend=row[4]) for row in cur.fetchall()]
 	for line in userinfo:
 		if line['trend']=="madam":			
-			trend=["collection","baroque","classicism"]
+			trend=["collection","baroque","collection"]
 		elif line['trend']=="yuppie":
-			trend=["neoclassicsim","rococo","realism"]		
+			trend=["baruoque","rococo","collection"]		
 		elif line['trend']=="avantgarde":
-			trend=["middelage","rococo","realism"]
+			trend=["middelage","rococo","collection"]
 		elif line['trend']=="smith":
-			trend=["neoclassicsim","rococo","realism"]
+			trend=["neoclassicsim","rococo","collection"]
 		elif line['trend']=="lady":
-			trend=["neoclassicsim","rococo","realism"]
+			trend=["neoclassicsim","rococo","collection"]
 		elif line['trend']=="realism":
-			trend=["neoclassicsim","rococo","realism"]
+			trend=["neoclassicsim","rococo","collection"]
 		elif line['trend']=="kitsch":
-			trend=["neoclassicsim","rococo","realism"]
+			trend=["neoclassicsim","rococo","collection"]
 		else:
-			trend=["colletion","rococo","realism"]
+			trend=["colletion","rococo","collection"]
 
 	ser=g.db.execute('select name,trend,latitude,longtitude,extra from museum where trend=? OR trend = ? OR trend = ?',(trend[0],trend[1],trend[2],))
 	museum=[dict(name=row[0],trend=row[1],latitude=row[2],longtitude=row[3],extra=row[4]) for row in ser.fetchall()]
@@ -155,8 +153,8 @@ def direction():
                 else:
                         trend=["colletion","rococo","realism"]
 
-        ser=g.db.execute('select name,trend,latitude,longtitude,extra from museum where trend=? OR trend = ? OR trend = ?',(trend[0],trend[1],trend[2],))
-        museum=[dict(name=row[0],trend=row[1],latitude=row[2],longtitude=row[3],extra=row[4]) for row in ser.fetchall()]
+        ser=g.db.execute('select id, name,trend,latitude,longtitude,extra from museum where trend=? OR trend = ? OR trend = ?',(trend[0],trend[1],trend[2],))
+        museum=[dict(id=row[0],name=row[1],trend=row[2],latitude=row[3],longtitude=row[4],extra=row[5]) for row in ser.fetchall()]
 
 	return render_template('direction.html',museum=museum)
 

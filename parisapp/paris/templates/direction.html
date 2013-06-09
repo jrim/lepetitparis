@@ -38,7 +38,7 @@
 	<div class= span8 >
 	<div id="information_panel" style="margin:5px;">we recommend these:<br>
 	{% for msm in museum %}
-	<b>{{ msm.name }}</b> - {{ msm.extra }}<br>
+	<b>{{ msm.name }}</b> - {{ msm.extra }} <img src="static/img/museum/{{ msm.id }}.jpg" /><br>
 	{% endfor %}
 
 </div>	
